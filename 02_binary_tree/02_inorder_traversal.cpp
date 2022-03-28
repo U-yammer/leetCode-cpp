@@ -20,17 +20,20 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> preorderTraversal(TreeNode* root) {
-        if (root == NULL) return;
-
+    vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
-        exec_preorder(root, res);
+
+        if (root == NULL) {
+            return res;
+        }
+
+        exec_inorder(root, res);
         return res;
     }
 
-    void exec_preorder(TreeNode* root, vector<int>& res) {
+    void exec_inorder(TreeNode* root, vector<int>& res) {
+        if (root->left != NULL) exec_inorder(root->left, res);
         res.push_back(root->val);
-        if (root->left  != NULL) exec_preorder(root->left, res);
-        if (root->right != NULL) exec_preorder(root->right, res);
+        if (root->right != NULL) exec_inorder(root->right, res);
     }
 };
